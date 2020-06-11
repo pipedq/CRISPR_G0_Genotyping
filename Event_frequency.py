@@ -21,8 +21,9 @@ position = total_data[1]
 
 frec_histogram = np.empty((len(total_data), 3), dtype=object)
 i = 0
+end = int(cut_pos_2) - position[0]
 
-for row_number in range(0, int(cut_pos_2) + 5):
+for row_number in range(0, end + 5):
     a = sequence[row_number]
     event_type = re.findall('[-+][0-9]+[ACGTNacgtn]+', a, flags=0)
     event_type_total = len(event_type)
@@ -36,7 +37,6 @@ for row_number in range(0, int(cut_pos_2) + 5):
             c = re.findall('[-+]+', b, flags=0)
             d = re.findall('[0-9]+', b, flags=0)
             e = int("".join(d))
-            print(str("".join(c)))
             if str("".join(c)) == '-':
                 if position[row_number] + e > int(cut_pos_1) - 5:
                     frec_histogram[i][0] = position[row_number]
